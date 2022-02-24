@@ -17,15 +17,21 @@ public class Weapon : MonoBehaviour
 
   private void Start()
   {
-    EventBus.Instance.Register("projectile-die", CountProjectiles);
+    EventBus.Instance.Register("projectile-die", OnProjectileDied);
   }
   private void OnDestroy()
   {
-    EventBus.Instance.Remove("projectile-die", CountProjectiles);
+    EventBus.Instance.Remove("projectile-die", OnProjectileDied);
   }
-  private void CountProjectiles(object sender, System.EventArgs e)
+
+  private void OnProjectileDied(object sender, System.EventArgs e)
   {
     projectile_at_flight--;
+    if (projectile_at_flight<0)
+    {
+      Debug.LogWarning("Number of projectiles is negative ?!");
+      projectile_at_flight = 0;
+    }
   }
 
   public void Fire()

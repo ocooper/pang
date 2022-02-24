@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2800023f78415446b1f2210a2ff0f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugSend: 1
+  debugSend: 0
 --- !u!4 &1174086647
 Transform:
   m_ObjectHideFlags: 0
@@ -367,7 +367,9 @@ MonoBehaviour:
   mainMenu: MainMenu
   inGameMenu: InGameUI
   levels:
-  - Level
+  - Level1
+  - Level2
+  - Level3
   livesPerRun: 0
 --- !u!4 &1968305343
 Transform:

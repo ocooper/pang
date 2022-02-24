@@ -26,16 +26,33 @@ public class Projectile : MonoBehaviour
     {
       if (colliders[i].gameObject.name == "Ceiling")
       {
-        Destroy(gameObject);
-        EventBus.Instance.Send("projectile-die");
+        Die();
       }
-      if ((1 << colliders[i].gameObject.layer) == enemies)
+      //if ((1 << colliders[i].gameObject.layer) == enemies.value)
       {
-        if (colliders[i].attachedRigidbody.TryGetComponent<Breakable>(out var br))
-          br.TakeHit();
-        Destroy(gameObject);
-        EventBus.Instance.Send("projectile-die");
+        if (colliders[i].attachedRigidbody == null)
+        {
+          if (colliders[i].gameObject.TryGetComponent<Breakable>(out var br))
+          {
+            br.TakeHit();
+            Die();
+          }
+        }
+        else
+        {
+          if (colliders[i].attachedRigidbody.TryGetComponent<Breakable>(out var br))
+          {
+            br.TakeHit();
+            Die();
+          }
+        }
+        //Die();
       }
     }
+  }
+  private void Die()
+  {
+    Destroy(gameObject);
+    EventBus.Instance.Send("projectile-die");
   }
 }
