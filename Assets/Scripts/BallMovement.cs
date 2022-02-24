@@ -7,6 +7,7 @@ public class BallMovement : MonoBehaviour
 {
   [Header("Movement")]
   [SerializeField] float xSpeed = 5;
+  [SerializeField] float initialYSpeed = 3;
   [SerializeField] float Height = 5;
   [SerializeField] float JumpTime = 3;
   [Header("Physics")]
@@ -34,8 +35,7 @@ public class BallMovement : MonoBehaviour
     var T = JumpTime / 2;
     g = -(2f * Height) / (T * T);
     v_0 = 2f * Height / T;
-    print($"g={g}");
-    print($"v_0={v_0}");
+    vely = initialYSpeed;
   }
 
   public void MoveRight(bool yes)

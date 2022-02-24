@@ -76,6 +76,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectile: {fileID: 870786826114572875, guid: feda2f0eda533774d9e9b5545a6b2640,
     type: 3}
-  rateOfFire: 2
+  rateOfFire: 1.5
   launchPoint: {fileID: 4035154123340541638}
   ammo: -1

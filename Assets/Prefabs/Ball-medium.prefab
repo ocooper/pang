@@ -117,7 +117,7 @@ SpriteRenderer:
   m_SortingLayerID: 997311075
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 59cd9d7fdc3532b45be9b8abeca293ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 224563d0dcc62964984c16bae35c8f65, type: 3}
   m_Color: {r: 0, g: 0.31988406, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xSpeed: 3
+  initialYSpeed: 3
   Height: 3.5
   JumpTime: 1.666
   wallLayer:

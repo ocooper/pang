@@ -70,7 +70,7 @@ SpriteRenderer:
   m_SortingLayerID: 997311075
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 59cd9d7fdc3532b45be9b8abeca293ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 224563d0dcc62964984c16bae35c8f65, type: 3}
   m_Color: {r: 0, g: 0.31988406, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -140,6 +140,7 @@ GameObject:
   - component: {fileID: 2471837364326898375}
   - component: {fileID: 4701457956141770085}
   - component: {fileID: 4978276989464327884}
+  - component: {fileID: 8758309527209385471}
   m_Layer: 9
   m_Name: Ball-small
   m_TagString: enemy
@@ -197,8 +198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xSpeed: 3
-  maxHeightAfterJump: 4
-  maxYVelocity: 3
+  initialYSpeed: 3
   Height: 2
   JumpTime: 1.33333
   wallLayer:
@@ -219,3 +219,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breaksInto: {fileID: 0}
   score: 100
+--- !u!114 &8758309527209385471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7472267456060198556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad461489a71ab3458764ec108375021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventOnStart: 
+  eventOnDestroy: small-ball-destroy

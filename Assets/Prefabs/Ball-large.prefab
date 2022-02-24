@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8843992525631872487}
   - component: {fileID: 8843992525631872482}
   - component: {fileID: 8843992525631872485}
+  - component: {fileID: 8815770685275376959}
   m_Layer: 9
   m_Name: Ball-large
   m_TagString: enemy
@@ -69,8 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xSpeed: 3
-  maxHeightAfterJump: 4
-  maxYVelocity: 3
+  initialYSpeed: 3
   Height: 5
   JumpTime: 2
   wallLayer:
@@ -92,6 +92,20 @@ MonoBehaviour:
   breaksInto: {fileID: 7067239956716921978, guid: 0c48d5a95a3457245ade18764876dea9,
     type: 3}
   score: 0
+--- !u!114 &8815770685275376959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8843992525631872486}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad461489a71ab3458764ec108375021, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventOnStart: large-ball-start
+  eventOnDestroy: 
 --- !u!1 &8843992525810397541
 GameObject:
   m_ObjectHideFlags: 0
@@ -209,7 +223,7 @@ SpriteRenderer:
   m_SortingLayerID: 997311075
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 59cd9d7fdc3532b45be9b8abeca293ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 224563d0dcc62964984c16bae35c8f65, type: 3}
   m_Color: {r: 0, g: 0.31988406, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

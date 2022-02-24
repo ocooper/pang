@@ -20,7 +20,6 @@ class EventBus : MonoBehaviour
   Dictionary<Key, List<EventHandler>> db = new Dictionary<Key, List<EventHandler>>();
   
   public bool debugSend;
-  public bool debugDispatch;
 
   private void Awake()
   {
@@ -59,8 +58,6 @@ class EventBus : MonoBehaviour
     {
       if (db.TryGetValue(item.Item1, out var listeners))
       {
-        if(debugDispatch)
-          print($"Sending {item.Item1} to {listeners.Count} handlers");
         foreach (var listener in listeners)
         {
           try
