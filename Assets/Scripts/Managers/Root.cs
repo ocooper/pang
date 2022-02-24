@@ -44,6 +44,7 @@ public class Root : MonoBehaviour
   {
     IEnumerator worker()
     {
+      EventBus.Instance.Send("loading-main-menu");
       yield return UnloadAll();
       yield return SceneManager.LoadSceneAsync(mainMenu, LoadSceneMode.Additive);
     }
