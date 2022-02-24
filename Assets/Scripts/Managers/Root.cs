@@ -6,15 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class Root : MonoBehaviour
 {
-  [SerializeField]
-  string mainMenu;
-  [SerializeField]
-  string inGameMenu;
-  [SerializeField]
-  string[] levels;
-  int cur_level;
+  [SerializeField] string mainMenu;
+  [SerializeField] string inGameMenu;
+  [SerializeField] string[] levels;
+  [Space]
+  [SerializeField] int livesPerRun;
 
-  int balls_left;
+  int cur_level;
+  int balls_left_in_cur_level;
+  int lives;
 
   private void Start()
   {
@@ -22,13 +22,20 @@ public class Root : MonoBehaviour
     EventBus.Instance.Register("highscores", OnHighscore);
     EventBus.Instance.Register("quit", OnQuit);
     EventBus.Instance.Register("end-level", OnBackToMainMenu);
-    EventBus.Instance.Register("large-ball-start", (sender, args) => balls_left += 4);
+    EventBus.Instance.Register("large-ball-start", (sender, args) => balls_left_in_cur_level += 4);
     EventBus.Instance.Register("small-ball-destroy", (sender, args) =>
     {
-      balls_left--;
-      if (balls_left == 0)
+      balls_left_in_cur_level--;
+      if (balls_left_in_cur_level == 0)
         NextLevel();
     });
+    EventBus.Instance.Register("player-died", (sender, args) =>
+    {
+      lives--;
+      if (lives == 0)
+        OnBackToMainMenu(null, null);
+    });
+    EventBus.Instance.Register("game-over", OnBackToMainMenu);
 
     OnBackToMainMenu(null, null);
   }
@@ -45,6 +52,8 @@ public class Root : MonoBehaviour
 
   void OnStart(object sender, EventArgs args)
   {
+    lives = livesPerRun;
+    EventBus.Instance.Send("game-start");
     StartCoroutine(MoveToLevel(0));
   }
 
@@ -63,12 +72,13 @@ public class Root : MonoBehaviour
   IEnumerator MoveToLevel(int index)
   {
     //todo: freeze animations, cover the screen
-    balls_left = 0;
+    balls_left_in_cur_level = 0;
     yield return UnloadAll();
     index = Mathf.Clamp(index, 0, levels.Length - 1);
     yield return SceneManager.LoadSceneAsync(levels[index], LoadSceneMode.Additive);
     yield return SceneManager.LoadSceneAsync(inGameMenu, LoadSceneMode.Additive);
     SceneManager.SetActiveScene(SceneManager.GetSceneByName(levels[index]));
+    yield return null; // a frame for scenes to wake up
     EventBus.Instance.Send("level-start");
     //todo: uncover the screen, start animations
     cur_level = index;
@@ -76,7 +86,7 @@ public class Root : MonoBehaviour
 
   void NextLevel()
   {
-    if (cur_level+1 < levels.Length)
+    if (cur_level + 1 < levels.Length)
       StartCoroutine(MoveToLevel(cur_level + 1));
     else
       OnBackToMainMenu(null, null);

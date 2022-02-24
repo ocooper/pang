@@ -150,8 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2800023f78415446b1f2210a2ff0f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  debugSend: 0
-  debugDispatch: 0
+  debugSend: 1
 --- !u!4 &1174086647
 Transform:
   m_ObjectHideFlags: 0
@@ -216,8 +215,9 @@ GameObject:
   - component: {fileID: 1968305343}
   - component: {fileID: 1968305342}
   - component: {fileID: 1968305344}
+  - component: {fileID: 1968305345}
   m_Layer: 0
-  m_Name: root
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,6 +239,7 @@ MonoBehaviour:
   inGameMenu: InGameUI
   levels:
   - Level
+  livesPerRun: 0
 --- !u!4 &1968305343
 Transform:
   m_ObjectHideFlags: 0
@@ -265,3 +266,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d243ce998df907844aad622a5ac620e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1968305345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1968305341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb2e3718c4184042a77976a26b9622d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  livesPerRun: 3
+  playerPrefab: {fileID: 5436553185636409009, guid: ffb7f0033c42dbe41b84d1bfd0e0d3bf,
+    type: 3}

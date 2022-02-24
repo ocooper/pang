@@ -17,15 +17,19 @@ public class ScoreSystem : MonoBehaviour
   private void Start()
   {
     EventBus.Instance.Register("add-score", AddScore);
-    EventBus.Instance.Register("level-start", ResetScore);
+    EventBus.Instance.Register("game-start", ResetScore);
+    EventBus.Instance.Register("level-start", UpdateUI);
   }
 
   private void ResetScore(object sender, EventArgs e)
   {
     score = 0;
-    EventBus.Instance.Send("set-score", null, new ScoreMessage { score = score });
   }
 
+  private void UpdateUI(object sender, EventArgs e)
+  {
+    EventBus.Instance.Send("set-score", null, new ScoreMessage { score = score });
+  }
   private void AddScore(object sender, EventArgs e)
   {
     score += (e as ScoreMessage).score;

@@ -21,12 +21,14 @@ public class PlayerController : MonoBehaviour
   private Collider2D[] enemies = new Collider2D[64];
   private RaycastHit2D[] hits = new RaycastHit2D[16];
   private Vector2 boxsize;
+  private Health health;
 
   private void Awake()
   {
     rb = GetComponent<Rigidbody2D>();
     var box = GetComponentInChildren<BoxCollider2D>();
     boxsize = Vector2.Scale(box.size, box.transform.lossyScale);
+    health = GetComponent<Health>();
   }
 
   void Update()
@@ -52,14 +54,12 @@ public class PlayerController : MonoBehaviour
     }
     rb.MovePosition(rb.position + move);
 
-    var filter = new ContactFilter2D() { useLayerMask = true, layerMask = enemyLayer };
-    count = rb.OverlapCollider(filter, enemies);
-    for (int i = 0; i < count; i++)
-      TakeDamage();
-  }
-
-  private void TakeDamage()
-  {
-    print("boom!!");
+    if (health)
+    {
+      var filter = new ContactFilter2D() { useLayerMask = true, layerMask = enemyLayer };
+      count = rb.OverlapCollider(filter, enemies);
+      for (int i = 0; i < count; i++)
+        health.TakeDamage();
+    }
   }
 }
