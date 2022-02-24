@@ -208,7 +208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
-  skinWidth: 0.005
+  skinWidth: 0.001
   wallLayer:
     serializedVersion: 2
     m_Bits: 256

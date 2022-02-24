@@ -71,6 +71,8 @@ MonoBehaviour:
   xSpeed: 3
   maxHeightAfterJump: 4
   maxYVelocity: 3
+  Height: 5
+  JumpTime: 2
   wallLayer:
     serializedVersion: 2
     m_Bits: 256

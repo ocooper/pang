@@ -48,9 +48,9 @@ public class PlayerController : MonoBehaviour
     {
       if (hits[i].normal == new Vector2(0, 1)) // ignore floor for now
         continue;
-      move += hits[i].normal * (move.magnitude - hits[i].distance);
+      move += hits[i].normal * (move.magnitude - (hits[i].distance - skinWidth));
     }
-    rb.MovePosition(rb.position + move * (1 - skinWidth));
+    rb.MovePosition(rb.position + move);
 
     var filter = new ContactFilter2D() { useLayerMask = true, layerMask = enemyLayer };
     count = rb.OverlapCollider(filter, enemies);

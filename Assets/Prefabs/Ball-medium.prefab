@@ -196,9 +196,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61530b71c1734b245b1c045cc3edd92e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  xSpeed: 4
-  maxHeightAfterJump: 4
-  maxYVelocity: 3
+  xSpeed: 3
+  Height: 3.5
+  JumpTime: 1.666
   wallLayer:
     serializedVersion: 2
     m_Bits: 256
