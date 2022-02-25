@@ -29,12 +29,6 @@ public class Root : MonoBehaviour
       if (balls_left_in_cur_level == 0)
         NextLevel();
     });
-    EventBus.Instance.Register("player-died", (sender, args) =>
-    {
-      lives--;
-      if (lives == 0)
-        OnBackToMainMenu(null, null);
-    });
     EventBus.Instance.Register("game-over", OnBackToMainMenu);
 
     OnBackToMainMenu(null, null);

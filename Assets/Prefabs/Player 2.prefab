@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b37da5c780c632d4294e5897ecdf6528, type: 3}
-  m_Color: {r: 0.25943398, g: 1, b: 0.27707845, a: 1}
+  m_Color: {r: 1, g: 0.8960046, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -149,10 +149,9 @@ GameObject:
   - component: {fileID: 5436553185636409036}
   - component: {fileID: 5436553185636409011}
   - component: {fileID: 5436553185636409010}
-  - component: {fileID: 5436553185636409037}
   - component: {fileID: 1933279193678274294}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,6 +207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00959b7e9df0bd441b253f7e5ac5626c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNumber: 1
   speed: 7
   skinWidth: 0.001
   wallLayer:
@@ -217,23 +217,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   weapon: {fileID: 366954162253605684}
-  movementInput: {x: 0, y: 0}
-  fire: 0
---- !u!114 &5436553185636409037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5436553185636409009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 057a8b13762eba44d9699cfc76f4520b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  horizontalAxis: Horizontal
-  fireButton: Jump
-  controller: {fileID: 5436553185636409010}
 --- !u!114 &1933279193678274294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,7 +231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1
   invincibleTimeAfterSpawn: 2
-  eventOnDeath: player-died
+  eventOnDeath: player-2-died
 --- !u!1001 &5195452334859831716
 PrefabInstance:
   m_ObjectHideFlags: 0

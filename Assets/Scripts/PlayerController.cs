@@ -5,17 +5,17 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class PlayerController : MonoBehaviour
 {
+  [SerializeField] int playerNumber;
   [SerializeField] float speed;
   [SerializeField] float skinWidth = 0.01f;
   [Space]
   [SerializeField] LayerMask wallLayer;
   [SerializeField] LayerMask enemyLayer;
+
   public Weapon weapon;
 
-  [HideInInspector]
-  public Vector2 movementInput;
-  [HideInInspector]
-  public bool fire;
+  float movementInput => InputSystem.Instance.horizontal(playerNumber);
+  bool fire => InputSystem.Instance.fire(playerNumber);
 
   private Rigidbody2D rb;
   private Collider2D[] enemies = new Collider2D[64];
@@ -36,14 +36,12 @@ public class PlayerController : MonoBehaviour
     if (fire)
     {
       weapon.Fire();
-      fire = false;
     }
   }
 
   private void FixedUpdate()
   {
-    movementInput.y = 0; // no jumping for now
-    var move = movementInput * speed * Time.deltaTime;
+    var move = new Vector2(movementInput * speed * Time.deltaTime, 0);
 
     int count = Physics2D.BoxCastNonAlloc(transform.position, boxsize, 0, move.normalized, hits, move.magnitude, wallLayer);
     for (int i = 0; i < count; i++)
