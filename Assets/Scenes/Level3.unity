@@ -313,13 +313,14 @@ GameObject:
   m_Component:
   - component: {fileID: 169472124}
   - component: {fileID: 169472123}
+  - component: {fileID: 169472125}
   m_Layer: 0
   m_Name: bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &169472123
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -359,7 +360,7 @@ SpriteRenderer:
   m_SortingLayerID: -2103383671
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d1ba08ce93387214cb44b1f215fc1833, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0f063bf2177fb954790dc80048d432a1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -384,6 +385,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &169472125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169472122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6171500aa2df1a4ba48b16022fd1e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 0}
 --- !u!1 &180628529
 GameObject:
   m_ObjectHideFlags: 0

@@ -19,6 +19,7 @@ public class Weapon : MonoBehaviour
   {
     EventBus.Instance.Register("projectile-die", OnProjectileDied);
   }
+  
   private void OnDestroy()
   {
     EventBus.Instance.Remove("projectile-die", OnProjectileDied);
