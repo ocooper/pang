@@ -445,7 +445,7 @@ MonoBehaviour:
     fireButton: Fire1
   - horizontal: Horizontal2
     fireButton: Fire2
-  horizontal:
+  horizontal_touch:
   - 0
   - 0
-  fire: 0000
+  fire_touch: 0000

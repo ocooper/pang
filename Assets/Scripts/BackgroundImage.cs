@@ -6,6 +6,7 @@ using UnityEngine;
 public class BackgroundImage : MonoBehaviour
 {
   [SerializeField] Camera cam;
+  [SerializeField, Range(-1,1)] float verticalPivot;
   void Start()
   {
     if (cam == null)
@@ -16,13 +17,20 @@ public class BackgroundImage : MonoBehaviour
     var size = renderer.sprite.rect.size;
 
     var aspect = Screen.width / Screen.height;
-
     var sprite_width_in_units = size.x / ppu;
     var sprite_height_in_units = size.y / ppu;
+    var sprite_aspect = size.x / size.y;
 
-    var scale_x = cam.orthographicSize * 2 / sprite_height_in_units;
-    var scale_y = (cam.orthographicSize * aspect) * 2 / sprite_width_in_units;
-    var s = Mathf.Max(scale_x, scale_y);
-    transform.localScale = new Vector3(s, s, 1);
+    if (sprite_aspect > aspect)
+    {
+      var s = 2 * cam.orthographicSize / sprite_height_in_units;
+      transform.localScale = new Vector3(s, s, 1);
+    }
+    else
+    {
+      var s = (2 * cam.orthographicSize * aspect) / sprite_width_in_units;
+      transform.localScale = new Vector3(s, s, 1);
+    }
+    transform.localPosition = new Vector3(0, verticalPivot * cam.orthographicSize, 0);
   }
 }
