@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
   [Space]
   [SerializeField] LayerMask wallLayer;
   [SerializeField] LayerMask enemyLayer;
-
-  public Weapon weapon;
+  [Space]
+  [SerializeField] Weapon weapon;
 
   float movementInput => InputSystem.Instance.horizontal(playerNumber);
   bool fire => InputSystem.Instance.fire(playerNumber);
@@ -29,11 +29,15 @@ public class PlayerController : MonoBehaviour
     var box = GetComponentInChildren<BoxCollider2D>();
     boxsize = Vector2.Scale(box.size, box.transform.lossyScale);
     health = GetComponent<Health>();
+    if (weapon == null)
+      weapon = GetComponentInChildren<Weapon>();
+    if (weapon != null)
+      weapon.BindUniquePlayer(playerNumber);
   }
 
   void Update()
   {
-    if (fire)
+    if (fire && weapon != null)
     {
       weapon.Fire();
     }

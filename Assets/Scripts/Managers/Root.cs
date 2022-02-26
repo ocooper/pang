@@ -15,9 +15,12 @@ public class Root : MonoBehaviour
   int cur_level;
   int balls_left_in_cur_level;
   int lives;
+  enum GameState { NotStarted, InProgress}
+  GameState game_state;
 
   private void Start()
   {
+    game_state = GameState.NotStarted;
     EventBus.Instance.Register("start", OnStart);
     EventBus.Instance.Register("highscores", OnHighscore);
     EventBus.Instance.Register("quit", OnQuit);
@@ -26,8 +29,9 @@ public class Root : MonoBehaviour
     EventBus.Instance.Register("small-ball-destroy", (sender, args) =>
     {
       balls_left_in_cur_level--;
-      if (balls_left_in_cur_level == 0)
-        NextLevel();
+      if (game_state == GameState.InProgress)
+        if (balls_left_in_cur_level == 0)
+          NextLevel();
     });
     EventBus.Instance.Register("game-over", OnBackToMainMenu);
 
@@ -42,12 +46,15 @@ public class Root : MonoBehaviour
       yield return UnloadAll();
       yield return SceneManager.LoadSceneAsync(mainMenu, LoadSceneMode.Additive);
     }
+    game_state = GameState.NotStarted;
     StartCoroutine(worker());
   }
 
   void OnStart(object sender, EventArgs args)
   {
     lives = livesPerRun;
+    balls_left_in_cur_level = 0;
+    game_state = GameState.InProgress;
     EventBus.Instance.Send("game-start");
     StartCoroutine(MoveToLevel(0));
   }
@@ -66,7 +73,11 @@ public class Root : MonoBehaviour
 
   IEnumerator MoveToLevel(int index)
   {
-    //todo: freeze animations, cover the screen
+    if(game_state == GameState.NotStarted){
+      Debug.LogError("You forgot to change the game state before calling MoveToLevel !!");
+      yield break;
+    }
+    //todo: loading screen on
     balls_left_in_cur_level = 0;
     yield return UnloadAll();
     index = Mathf.Clamp(index, 0, levels.Length - 1);
@@ -75,7 +86,7 @@ public class Root : MonoBehaviour
     SceneManager.SetActiveScene(SceneManager.GetSceneByName(levels[index]));
     yield return null; // a frame for scenes to wake up
     EventBus.Instance.Send("level-start");
-    //todo: uncover the screen, start animations
+    //todo: loading screen off
     cur_level = index;
   }
 

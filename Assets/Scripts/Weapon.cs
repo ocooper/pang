@@ -13,40 +13,35 @@ public class Weapon : MonoBehaviour
   [SerializeField] float ammo = -1;
 
   private float lastFireTime = float.MinValue;
-  private int projectile_at_flight = 0;
-
-  private void Start()
-  {
-    EventBus.Instance.Register("projectile-die", OnProjectileDied);
-  }
+  private int player_id;
   
-  private void OnDestroy()
-  {
-    EventBus.Instance.Remove("projectile-die", OnProjectileDied);
-  }
+  // I allow a player to have only N projectiles in flight at the same time.
+  // That information has to be kept in a static variable, because the player can die, 
+  // and then the Player and Weapon scripts are destroyed and their local members are gone.
+  // So I keep it in a static dictionary, where each player gets his own list of projectiles
+  private static IDictionary<int, List<GameObject>> tracked_projectiles;
 
-  private void OnProjectileDied(object sender, System.EventArgs e)
+  public void BindUniquePlayer(int player_id)
   {
-    projectile_at_flight--;
-    if (projectile_at_flight<0)
-    {
-      Debug.LogWarning("Number of projectiles is negative ?!");
-      projectile_at_flight = 0;
-    }
+    this.player_id = player_id;
+    tracked_projectiles = tracked_projectiles ?? new SortedList<int, List<GameObject>>();
   }
 
   public void Fire()
   {
+    if (!tracked_projectiles.TryGetValue(player_id, out var players_projectiles))
+      tracked_projectiles[player_id] = players_projectiles = new List<GameObject>();
+    players_projectiles.RemoveAll(x => x == null); // remove dead objects
     var delay = 1f / rateOfFire;
     if (Time.time - lastFireTime > delay &&
         (ammo == -1 || ammo > 0) &&
-        (projectile_at_flight < maxProjectileAtOnce))
+        (players_projectiles.Count < maxProjectileAtOnce))
     {
       lastFireTime = Time.time;
-      projectile_at_flight++;
       if (ammo > 0)
         ammo--;
       var pr = Instantiate(projectile, launchPoint.position, Quaternion.identity);
+      players_projectiles.Add(pr);
     }
   }
 }
