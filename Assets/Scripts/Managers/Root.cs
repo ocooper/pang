@@ -24,7 +24,6 @@ public class Root : MonoBehaviour
     EventBus.Instance.Register("start", OnStart);
     EventBus.Instance.Register("highscores", OnHighscore);
     EventBus.Instance.Register("quit", OnQuit);
-    EventBus.Instance.Register("end-level", OnBackToMainMenu);
     EventBus.Instance.Register("large-ball-start", (sender, args) => balls_left_in_cur_level += 4);
     EventBus.Instance.Register("small-ball-destroy", (sender, args) =>
     {
